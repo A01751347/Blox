@@ -1,0 +1,12 @@
+{
+  "id": "turbo",
+  "name": "Turbo",
+  "team": "green",
+  "skinTone": "#B97A57",
+  "hairColor": "#1F1F24",
+  "face": { "eyes": "shades", "mouth": "line", "extras": [] },
+  "shirt": { "template": "jacket", "colors": ["#2DC653", "#1B1B1F"] },
+  "pants": { "template": "sideStripe", "colors": ["#1B1B1F", "#2DC653"] },
+  "accessories": ["hair_mane"],
+  "style": { "energyBias": 1.1, "signature": "street_footwork" }
+}

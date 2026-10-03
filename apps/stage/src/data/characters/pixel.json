@@ -1,0 +1,11 @@
+{
+  "id": "pixel",
+  "name": "Pixel",
+  "team": "yellow",
+  "skinTone": "#F2C48D",
+  "face": { "eyes": "oval", "mouth": "grinOpen", "extras": ["blush"] },
+  "shirt": { "template": "hoodie", "colors": ["#FFD23F", "#1B1B1F"], "number": 8 },
+  "pants": { "template": "plain", "colors": ["#3A3A4A"] },
+  "accessories": ["backpack", "wings"],
+  "style": { "energyBias": 1.0, "signature": "float_twirl" }
+}

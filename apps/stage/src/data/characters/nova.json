@@ -1,0 +1,12 @@
+{
+  "id": "nova",
+  "name": "Nova",
+  "team": "yellow",
+  "skinTone": "#8D5524",
+  "hairColor": "#1B1B1F",
+  "face": { "eyes": "happyArc", "mouth": "smile", "extras": ["blush", "brows"] },
+  "shirt": { "template": "suit", "colors": ["#FFBE0B", "#E5383B", "#FFFFFF"] },
+  "pants": { "template": "plain", "colors": ["#E0A400"] },
+  "accessories": ["hair_mane", "crown", "cape"],
+  "style": { "energyBias": 1.0, "signature": "diva_pose" }
+}

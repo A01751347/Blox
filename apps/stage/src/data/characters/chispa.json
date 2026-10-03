@@ -1,0 +1,12 @@
+{
+  "id": "chispa",
+  "name": "Chispa",
+  "team": "red",
+  "skinTone": "#F2C48D",
+  "hairColor": "#3a1c10",
+  "face": { "eyes": "oval", "mouth": "grinOpen", "extras": ["brows"] },
+  "shirt": { "template": "hoodie", "colors": ["#E5383B", "#FFFFFF"], "number": 1 },
+  "pants": { "template": "plain", "colors": ["#22223B"] },
+  "accessories": ["hair_spiky", "headphones"],
+  "style": { "energyBias": 1.2, "signature": "spark_jump" }
+}

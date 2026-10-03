@@ -1,0 +1,11 @@
+{
+  "id": "rex",
+  "name": "Rex",
+  "team": "red",
+  "skinTone": "#E0AC69",
+  "face": { "eyes": "dot", "mouth": "teeth", "extras": ["freckles"] },
+  "shirt": { "template": "hoodie", "colors": ["#C9302C", "#7BD96A"] },
+  "pants": { "template": "plain", "colors": ["#3D405B"] },
+  "accessories": ["dino_spikes"],
+  "style": { "energyBias": 1.0, "signature": "clumsy_stomp" }
+}

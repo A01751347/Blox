@@ -1,0 +1,11 @@
+{
+  "id": "taco",
+  "name": "Taco",
+  "team": "green",
+  "skinTone": "#D49A6A",
+  "face": { "eyes": "oval", "mouth": "tongue", "extras": ["freckles"] },
+  "shirt": { "template": "plain", "colors": ["#8AC926"] },
+  "pants": { "template": "plain", "colors": ["#6B4F3A"] },
+  "accessories": ["cap_back"],
+  "style": { "energyBias": 1.1, "signature": "cumbia_spin" }
+}

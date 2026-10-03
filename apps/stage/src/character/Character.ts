@@ -1,6 +1,9 @@
 import * as THREE from 'three';
 import { buildRig } from './rigBuilder';
 import { JOINT_NAMES } from './types';
+import type { Accessory } from './accessories/accessoryTypes';
+import type { ExpressionName } from './face/faceTypes';
+import type { FaceController } from './face/FaceController';
 import type { JointName, JointPose, PartName, Vec3 } from './types';
 
 const DEGREES_TO_RADIANS = Math.PI / 180;
@@ -10,6 +13,8 @@ export class Character {
   readonly root: THREE.Object3D;
   readonly joints: Record<JointName, THREE.Object3D>;
   readonly parts: Record<PartName, THREE.Mesh>;
+  readonly accessories: Accessory[] = [];
+  face: FaceController | null = null;
   private readonly restPositions: Record<JointName, THREE.Vector3>;
 
   constructor(baseColor: THREE.ColorRepresentation = '#9aa0a6') {
@@ -54,7 +59,23 @@ export class Character {
     this.setHipsOffset([0, 0, 0]);
   }
 
+  mountAccessory(accessory: Accessory): void {
+    const anchor = accessory.anchor === 'neck' ? this.joints.neck : this.joints.torso;
+    anchor.add(accessory.object);
+    this.accessories.push(accessory);
+  }
+
+  setExpression(expression: ExpressionName): void {
+    this.face?.setExpression(expression);
+  }
+
+  update(deltaSeconds: number, elapsedSeconds: number): void {
+    this.face?.update(deltaSeconds);
+    this.accessories.forEach((accessory) => accessory.update?.(deltaSeconds, elapsedSeconds));
+  }
+
   dispose(): void {
+    this.face?.dispose();
     this.root.traverse((object) => {
       if (!(object instanceof THREE.Mesh)) return;
       object.geometry.dispose();

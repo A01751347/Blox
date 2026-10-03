@@ -1,0 +1,11 @@
+{
+  "id": "mochi",
+  "name": "Mochi",
+  "team": "blue",
+  "skinTone": "#FFDDB8",
+  "face": { "eyes": "dot", "mouth": "smile", "extras": ["blush"] },
+  "shirt": { "template": "overalls", "colors": ["#3A86FF", "#FFFFFF"] },
+  "pants": { "template": "plain", "colors": ["#3A86FF"] },
+  "accessories": ["beanie"],
+  "style": { "energyBias": 0.9, "signature": "mochi_bounce" }
+}

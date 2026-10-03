@@ -1,0 +1,6 @@
+{
+  "idle": {},
+  "hype": { "eyes": "star", "mouth": "grinOpen", "extras": ["blush"] },
+  "victory": { "eyes": "happyArc", "mouth": "grinOpen", "extras": ["blush", "brows"] },
+  "lose": { "eyes": "dot", "mouth": "frown", "extras": ["browsSad"] }
+}

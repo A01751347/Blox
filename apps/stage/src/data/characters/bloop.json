@@ -1,0 +1,11 @@
+{
+  "id": "bloop",
+  "name": "Bloop",
+  "team": "blue",
+  "skinTone": "#B8C4D0",
+  "face": { "eyes": "oval", "mouth": "line", "extras": [] },
+  "shirt": { "template": "stripes", "colors": ["#3A86FF", "#FFFFFF"] },
+  "pants": { "template": "plain", "colors": ["#2B2D42"] },
+  "accessories": ["traffic_cone"],
+  "style": { "energyBias": 0.95, "signature": "robot_lock" }
+}
