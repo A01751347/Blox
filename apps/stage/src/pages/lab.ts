@@ -3,6 +3,7 @@ import { CHARACTER_SPECS, findCharacterSpec } from '../character/characterLibrar
 import { createCharacter } from '../character/characterFactory';
 import { EXPRESSION_NAMES } from '../character/face/faceTypes';
 import type { ExpressionName } from '../character/face/faceTypes';
+import { createDanceControls } from './danceControls';
 import { createJointSliders } from './jointSliders';
 import { createLabScene } from './labScene';
 
@@ -14,6 +15,7 @@ const lab = createLabScene(canvas);
 
 let expression: ExpressionName = 'idle';
 let characters: Character[] = [];
+let danceControls: ReturnType<typeof createDanceControls> | null = null;
 
 function clearCharacters(): void {
   characters.forEach((character) => {
@@ -29,6 +31,7 @@ function showCharacter(id: string): void {
   character.setExpression(expression);
   lab.scene.add(character.root);
   characters = [character];
+  danceControls?.rebind(characters);
   lab.controls.target.set(0, 3, 0);
   lab.camera.position.set(0, 4.5, 13);
 }
@@ -43,6 +46,7 @@ function showGallery(): void {
     lab.scene.add(character.root);
     return character;
   });
+  danceControls?.rebind(characters);
   lab.controls.target.set(0, 3, 0);
   lab.camera.position.set(0, 5, 34);
 }
@@ -75,13 +79,14 @@ function addButton(label: string, onClick: () => void): void {
 }
 
 const ids = CHARACTER_SPECS.map((spec) => spec.id);
-addSelect('Personaje', ids, showCharacter);
+const characterSelect = addSelect('Personaje', ids, showCharacter);
 addSelect('Expresión', EXPRESSION_NAMES, (value) => {
   expression = value;
   characters.forEach((character) => character.setExpression(value));
 });
 addButton('Ver los 8', showGallery);
 
+danceControls = createDanceControls(panel, characters);
 const sliders = createJointSliders(
   panel,
   () => characters[0] ?? createCharacter(findCharacterSpec('chispa')),
@@ -97,7 +102,14 @@ if (EXPRESSION_NAMES.some((name) => name === requestedExpression)) {
   expression = requestedExpression as ExpressionName;
 }
 if (query.has('all')) showGallery();
-else showCharacter(query.get('id') ?? ids[0] ?? 'chispa');
+else {
+  const initialId = query.get('id') ?? ids[0] ?? 'chispa';
+  characterSelect.value = initialId;
+  showCharacter(initialId);
+}
 if (query.has('back')) lab.camera.position.z = -lab.camera.position.z;
 
-lab.run((delta, elapsed) => characters.forEach((character) => character.update(delta, elapsed)));
+lab.run((delta, elapsed) => {
+  danceControls?.update(elapsed);
+  characters.forEach((character) => character.update(delta, elapsed));
+});

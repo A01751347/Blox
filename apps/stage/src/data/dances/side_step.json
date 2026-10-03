@@ -1,0 +1,180 @@
+{
+  "id": "side_step",
+  "name": "Side Step",
+  "kind": "dance",
+  "level": 0,
+  "beats": 4,
+  "loop": true,
+  "keyframes": [
+    {
+      "beat": 0.0,
+      "joints": {
+        "shoulderL": [-10.0, 0.0, -25.0],
+        "shoulderR": [-10.0, 0.0, 25.0]
+      },
+      "ease": "linear"
+    },
+    {
+      "beat": 0.25,
+      "joints": {
+        "torso": [0.0, 0.0, -2.296],
+        "shoulderL": [-10.0, 0.0, -19.642],
+        "shoulderR": [-10.0, 0.0, 30.358],
+        "legL": [0.0, 0.0, -7.304]
+      },
+      "rootOffset": [0.268, 0.071, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 0.5,
+      "joints": {
+        "torso": [0.0, 0.0, -4.243],
+        "shoulderL": [-10.0, 0.0, -15.101],
+        "shoulderR": [-10.0, 0.0, 34.899],
+        "legL": [0.0, 0.0, -11.657]
+      },
+      "rootOffset": [0.495, 0.1, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 0.75,
+      "joints": {
+        "torso": [0.0, 0.0, -5.543],
+        "shoulderL": [-10.0, 0.0, -12.066],
+        "shoulderR": [-10.0, 0.0, 37.934],
+        "legL": [0.0, 0.0, -11.634]
+      },
+      "rootOffset": [0.647, 0.071, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 1.0,
+      "joints": {
+        "torso": [0.0, 0.0, -6.0],
+        "shoulderL": [-10.0, 0.0, -11.0],
+        "shoulderR": [-10.0, 0.0, 39.0],
+        "legL": [0.0, 0.0, -8.0]
+      },
+      "rootOffset": [0.7, 0.0, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 1.25,
+      "joints": {
+        "torso": [0.0, 0.0, -5.543],
+        "shoulderL": [-10.0, 0.0, -12.066],
+        "shoulderR": [-10.0, 0.0, 37.934],
+        "legL": [0.0, 0.0, -7.391]
+      },
+      "rootOffset": [0.647, 0.071, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 1.5,
+      "joints": {
+        "torso": [0.0, 0.0, -4.243],
+        "shoulderL": [-10.0, 0.0, -15.101],
+        "shoulderR": [-10.0, 0.0, 34.899],
+        "legL": [0.0, 0.0, -5.657]
+      },
+      "rootOffset": [0.495, 0.1, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 1.75,
+      "joints": {
+        "torso": [0.0, 0.0, -2.296],
+        "shoulderL": [-10.0, 0.0, -19.642],
+        "shoulderR": [-10.0, 0.0, 30.358],
+        "legL": [0.0, 0.0, -3.061]
+      },
+      "rootOffset": [0.268, 0.071, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 2.0,
+      "joints": {
+        "shoulderL": [-10.0, 0.0, -25.0],
+        "shoulderR": [-10.0, 0.0, 25.0]
+      },
+      "ease": "linear"
+    },
+    {
+      "beat": 2.25,
+      "joints": {
+        "torso": [0.0, 0.0, 2.296],
+        "shoulderL": [-10.0, 0.0, -30.358],
+        "shoulderR": [-10.0, 0.0, 19.642],
+        "legR": [0.0, 0.0, 7.304]
+      },
+      "rootOffset": [-0.268, 0.071, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 2.5,
+      "joints": {
+        "torso": [0.0, 0.0, 4.243],
+        "shoulderL": [-10.0, 0.0, -34.899],
+        "shoulderR": [-10.0, 0.0, 15.101],
+        "legR": [0.0, 0.0, 11.657]
+      },
+      "rootOffset": [-0.495, 0.1, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 2.75,
+      "joints": {
+        "torso": [0.0, 0.0, 5.543],
+        "shoulderL": [-10.0, 0.0, -37.934],
+        "shoulderR": [-10.0, 0.0, 12.066],
+        "legR": [0.0, 0.0, 11.634]
+      },
+      "rootOffset": [-0.647, 0.071, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 3.0,
+      "joints": {
+        "torso": [0.0, 0.0, 6.0],
+        "shoulderL": [-10.0, 0.0, -39.0],
+        "shoulderR": [-10.0, 0.0, 11.0],
+        "legR": [0.0, 0.0, 8.0]
+      },
+      "rootOffset": [-0.7, 0.0, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 3.25,
+      "joints": {
+        "torso": [0.0, 0.0, 5.543],
+        "shoulderL": [-10.0, 0.0, -37.934],
+        "shoulderR": [-10.0, 0.0, 12.066],
+        "legR": [0.0, 0.0, 7.391]
+      },
+      "rootOffset": [-0.647, 0.071, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 3.5,
+      "joints": {
+        "torso": [0.0, 0.0, 4.243],
+        "shoulderL": [-10.0, 0.0, -34.899],
+        "shoulderR": [-10.0, 0.0, 15.101],
+        "legR": [0.0, 0.0, 5.657]
+      },
+      "rootOffset": [-0.495, 0.1, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 3.75,
+      "joints": {
+        "torso": [0.0, 0.0, 2.296],
+        "shoulderL": [-10.0, 0.0, -30.358],
+        "shoulderR": [-10.0, 0.0, 19.642],
+        "legR": [0.0, 0.0, 3.061]
+      },
+      "rootOffset": [-0.268, 0.071, 0.0],
+      "ease": "linear"
+    }
+  ]
+}

@@ -12,6 +12,7 @@ import {
   buildTrafficCone,
 } from './headAccessories';
 import type * as THREE from 'three';
+import { createHairSway } from './hairSway';
 
 type Builder = (context: AccessoryContext) => THREE.Object3D;
 
@@ -33,5 +34,7 @@ const STATIC_BUILDERS: Record<Exclude<AccessoryName, 'cape'>, [AccessoryAnchor, 
 export function buildAccessory(name: AccessoryName, context: AccessoryContext): Accessory {
   if (name === 'cape') return buildCape(context);
   const [anchor, builder] = STATIC_BUILDERS[name];
-  return { name, anchor, object: builder(context) };
+  const object = builder(context);
+  if (name.startsWith('hair_')) return { name, anchor, object, update: createHairSway(object) };
+  return { name, anchor, object };
 }
