@@ -76,3 +76,14 @@ export function downloadText(filename: string, text: string): void {
   link.click();
   URL.revokeObjectURL(url);
 }
+
+export function createFileInput(onText: (text: string) => void): HTMLInputElement {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'application/json';
+  input.addEventListener('change', async () => {
+    const file = input.files?.[0];
+    if (file) onText(await file.text());
+  });
+  return input;
+}

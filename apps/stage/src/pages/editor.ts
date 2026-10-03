@@ -11,6 +11,7 @@ import {
   appendHeading,
   appendRow,
   createButton,
+  createFileInput,
   createNumberInput,
   createSelect,
   createTextInput,
@@ -40,10 +41,8 @@ const clock = new BeatClock(() => (metronome.running ? metronome.now() : perform
 const errors = document.createElement('div');
 errors.className = 'panel-error';
 const offsetInputs: HTMLInputElement[] = [];
-let sliders: ReturnType<typeof createJointSliders>;
 let easeSelect: HTMLSelectElement;
 let metaFields: HTMLInputElement[] = [];
-let timeline: TimelineView;
 
 function refreshUi(): void {
   session.applyTo(character);
@@ -143,14 +142,9 @@ function buildTransportSection(): void {
     ),
     createButton('Copiar', () => void navigator.clipboard?.writeText(session.model.toJson())),
   );
-  const fileInput = document.createElement('input');
-  fileInput.type = 'file';
-  fileInput.accept = 'application/json';
-  fileInput.addEventListener('change', async () => {
-    const file = fileInput.files?.[0];
-    if (!file) return;
+  const fileInput = createFileInput(async (text) => {
     try {
-      session.load(EditorModel.parse(await file.text()));
+      session.load(EditorModel.parse(text));
       refreshUi();
     } catch (error) {
       errors.textContent = String(error);
@@ -219,7 +213,7 @@ function buildKeyframeSection(): void {
 buildMetaSection();
 buildTransportSection();
 buildKeyframeSection();
-sliders = createJointSliders(
+const sliders = createJointSliders(
   panel,
   () => character,
   (name, value) => {
@@ -227,7 +221,7 @@ sliders = createJointSliders(
     timeline.render(session.model, session.selected, session.playhead);
   },
 );
-timeline = new TimelineView(timelineElement, {
+const timeline = new TimelineView(timelineElement, {
   onSelect: (index) => {
     session.select(index);
     refreshUi();
