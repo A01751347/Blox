@@ -42,6 +42,11 @@
         <div class="row">Fuente activa: <span id="source" class="pill"></span></div>
         <div class="row">TikTok: <span id="tiktok" class="pill"></span></div>
         <div class="row">Usuario del live: <span id="username"></span></div>
+        <div class="row">
+          <input id="tiktokUser" placeholder="@usuario" />
+          <button id="tiktokConnect">Conectar</button>
+          <button id="tiktokDisconnect">Desconectar</button>
+        </div>
         <div class="row">Simulador: <span id="simulator" class="pill"></span></div>
       </section>
       <section>
@@ -125,6 +130,8 @@
       $('stormStop').addEventListener('click', () => post('simulator', { action: 'stopStorm' }));
       $('panic').addEventListener('click', () => post('panic', { enabled: !status.state.panic }));
       $('brb').addEventListener('click', () => post('brb', { enabled: !status.state.brb }));
+      $('tiktokConnect').addEventListener('click', () => post('tiktok', { action: 'connect', username: $('tiktokUser').value }));
+      $('tiktokDisconnect').addEventListener('click', () => post('tiktok', { action: 'disconnect' }));
       $('track').addEventListener('change', (event) => post('track', { trackId: event.target.value || null }));
       $('addWord').addEventListener('click', () => {
         const value = $('word').value.trim();

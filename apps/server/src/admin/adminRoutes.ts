@@ -18,11 +18,11 @@ type RoundAction = 'pause' | 'resume' | 'skip' | 'resetPoints';
 type ModerationAction = 'blockUser' | 'unblockUser' | 'addWord' | 'removeWord';
 
 export function buildStatus(runtime: GameRuntime) {
-  const { engine, moderation, simulator, tiktok } = runtime;
+  const { engine, moderation, simulator } = runtime;
   return {
     state: engine.getState(),
     simulator: { ...simulator.status(), storming: simulator.isStorming() },
-    tiktok: { ...tiktok.status(), username: process.env.TIKTOK_USERNAME ?? null },
+    tiktok: runtime.tiktokInfo(),
     moderation: moderation.lists(),
     viewers: engine.users.recent(RECENT_VIEWERS).map((user) => ({
       userId: user.userId,
@@ -61,6 +61,20 @@ export function registerAdminRoutes(app: FastifyInstance, runtime: GameRuntime):
     runSimulatorAction(runtime, request.body);
     return { ok: true };
   });
+
+  app.post<{ Body: { action: 'connect' | 'disconnect'; username?: string } }>(
+    '/api/admin/tiktok',
+    async (request, reply) => {
+      const { action, username } = request.body;
+      if (action === 'disconnect') {
+        runtime.disconnectTikTok();
+        return { ok: true };
+      }
+      if (!username?.trim()) return reply.code(400).send({ error: 'username required' });
+      runtime.connectTikTok(username.trim().replace(/^@/, ''));
+      return { ok: true };
+    },
+  );
 
   app.post<{ Body: { enabled: boolean } }>('/api/admin/panic', async (request) => {
     runtime.engine.setPanic(Boolean(request.body.enabled));
