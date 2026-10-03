@@ -9,7 +9,8 @@ export interface ServerClientHandlers {
 const RECONNECT_DELAY_MS = 1000;
 
 export function connectToServer(handlers: ServerClientHandlers): void {
-  const url = `ws://${location.hostname}:3000/ws`;
+  const host = location.port === '5173' ? `${location.hostname}:3000` : location.host;
+  const url = `ws://${host}/ws`;
 
   const open = () => {
     const socket = new WebSocket(url);

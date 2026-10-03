@@ -15,7 +15,7 @@ const params = new URLSearchParams(location.search);
 
 fitFrameToViewport(frame);
 const renderer = createRenderer(canvas);
-const app = new StageApp(renderer, createDemoState(params));
+const app = new StageApp(renderer, createDemoState(params), !params.has('mute'));
 const useDemo = params.has('demo') || params.has('bench');
 
 const overlayView = new Overlay(overlay);

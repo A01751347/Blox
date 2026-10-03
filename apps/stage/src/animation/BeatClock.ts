@@ -10,7 +10,7 @@ export class BeatClock {
   private timing: TrackTiming;
 
   constructor(
-    private readonly timeSource: TimeSource,
+    private timeSource: TimeSource,
     timing: Partial<TrackTiming> = {},
   ) {
     this.timing = {
@@ -18,6 +18,10 @@ export class BeatClock {
       offsetSeconds: timing.offsetSeconds ?? 0,
       startedAtSeconds: timing.startedAtSeconds ?? timeSource(),
     };
+  }
+
+  setTimeSource(timeSource: TimeSource): void {
+    this.timeSource = timeSource;
   }
 
   setTrack(timing: TrackTiming): void {

@@ -16,6 +16,8 @@ const FORCE_FOREVER_BEATS = 10000;
 const SIGNATURE_BEATS = 8;
 const SHARE_BEATS = 4;
 const MAX_LOOK_YAW_DEGREES = 30;
+const ENTRANCE_HEIGHT = 18;
+const EXIT_HEIGHT = 26;
 
 interface Dancer {
   team: TeamId;
@@ -79,7 +81,7 @@ export class RosterController {
       dancer.animator.update(elapsedSeconds);
       dancer.character.setExpression(this.expressionFor(state, team, level));
       dancer.character.update(deltaSeconds, elapsedSeconds);
-      this.walk(dancer, resolving ? this.standFor(state, team) : dancer.home, deltaSeconds);
+      this.walk(dancer, this.targetFor(state, dancer, resolving), deltaSeconds);
     });
   }
 
@@ -97,7 +99,7 @@ export class RosterController {
       const spec = findCharacterSpec(roster[team]);
       const character = createCharacter(spec);
       const home = platformPosition(team).setY(PLATFORM_TOP_Y);
-      character.root.position.copy(home);
+      character.root.position.copy(home).setY(home.y + ENTRANCE_HEIGHT);
       this.scene.add(character.root);
       this.director.register(spec.id, spec.style.signature);
       const animator = new Animator(character, this.clock, spec.style.energyBias);
@@ -119,6 +121,12 @@ export class RosterController {
   private expressionFor(state: GameState, team: TeamId, level: number) {
     if (state.phase === 'RESULTS') return state.winners.includes(team) ? 'victory' : 'lose';
     return level >= 2 ? 'hype' : 'idle';
+  }
+
+  private targetFor(state: GameState, dancer: Dancer, resolving: boolean): THREE.Vector3 {
+    if (resolving) return this.standFor(state, dancer.team);
+    if (state.phase === 'COOLDOWN') return dancer.home.clone().setY(dancer.home.y + EXIT_HEIGHT);
+    return dancer.home;
   }
 
   private standFor(state: GameState, team: TeamId): THREE.Vector3 {

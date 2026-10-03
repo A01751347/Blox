@@ -15,3 +15,9 @@ runtime.start();
 await app.listen({ port, host: '0.0.0.0' });
 
 if (process.env.TIKTOK_USERNAME) runtime.connectTikTok(process.env.TIKTOK_USERNAME);
+
+process.on('unhandledRejection', (reason) => app.log.error({ reason }, 'unhandled rejection'));
+process.on('uncaughtException', (error) => app.log.error({ error }, 'uncaught exception'));
+for (const signal of ['SIGINT', 'SIGTERM'] as const) {
+  process.on(signal, () => void app.close().then(() => process.exit(0)));
+}

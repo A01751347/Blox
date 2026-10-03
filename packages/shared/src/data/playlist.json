@@ -6,7 +6,18 @@
       "file": null,
       "bpm": 110,
       "offsetSeconds": 0,
-      "license": "original-procedural"
+      "license": "original-procedural",
+      "style": {
+        "root": 57,
+        "scale": [0, 2, 3, 5, 7, 8, 10],
+        "progression": [0, 5, 3, 4],
+        "kick": "x...x...x...x...",
+        "snare": "....x.......x...",
+        "hat": "..x...x...x...x.",
+        "bass": "x..x..x.x..x..x.",
+        "lead": "x.x.x.xxx.x.x.x.",
+        "leadWave": "square"
+      }
     },
     {
       "id": "groove_120",
@@ -14,7 +25,18 @@
       "file": null,
       "bpm": 120,
       "offsetSeconds": 0,
-      "license": "original-procedural"
+      "license": "original-procedural",
+      "style": {
+        "root": 55,
+        "scale": [0, 2, 4, 5, 7, 9, 11],
+        "progression": [0, 3, 4, 3],
+        "kick": "x...x...x...x..x",
+        "snare": "....x.......x..x",
+        "hat": "x.x.x.x.x.x.x.x.",
+        "bass": "x.xx.x.xx.xx.x.x",
+        "lead": "..x.x...x.x..x.x",
+        "leadWave": "triangle"
+      }
     },
     {
       "id": "bounce_126",
@@ -22,7 +44,18 @@
       "file": null,
       "bpm": 126,
       "offsetSeconds": 0,
-      "license": "original-procedural"
+      "license": "original-procedural",
+      "style": {
+        "root": 52,
+        "scale": [0, 2, 3, 5, 7, 8, 10],
+        "progression": [0, 2, 5, 4],
+        "kick": "x...x...x...x.x.",
+        "snare": "....x.......x...",
+        "hat": ".x.x.x.x.x.x.x.x",
+        "bass": "x...x.x.x...x.x.",
+        "lead": "x..x..x.x..x..x.",
+        "leadWave": "sawtooth"
+      }
     },
     {
       "id": "rush_132",
@@ -30,7 +63,18 @@
       "file": null,
       "bpm": 132,
       "offsetSeconds": 0,
-      "license": "original-procedural"
+      "license": "original-procedural",
+      "style": {
+        "root": 59,
+        "scale": [0, 2, 4, 7, 9, 11, 12],
+        "progression": [0, 4, 5, 3],
+        "kick": "x.x.x.x.x.x.x.x.",
+        "snare": "....x..x....x...",
+        "hat": "xxxxxxxxxxxxxxxx",
+        "bass": "xxxxxxxxxxxxxxxx",
+        "lead": "x.xx.xx.x.xx.xx.",
+        "leadWave": "square"
+      }
     }
   ]
 }

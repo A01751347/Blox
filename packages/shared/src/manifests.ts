@@ -2,6 +2,18 @@ import type { TeamId } from './types.js';
 import rosterJson from './data/roster.json';
 import playlistJson from './data/playlist.json';
 
+export interface TrackStyle {
+  root: number;
+  scale: number[];
+  progression: number[];
+  kick: string;
+  snare: string;
+  hat: string;
+  bass: string;
+  lead: string;
+  leadWave: 'square' | 'triangle' | 'sawtooth';
+}
+
 export interface TrackManifestEntry {
   id: string;
   title: string;
@@ -9,6 +21,7 @@ export interface TrackManifestEntry {
   bpm: number;
   offsetSeconds: number;
   license: string;
+  style?: TrackStyle;
 }
 
 export const ROSTER_ROTATION = rosterJson.rotation as Array<Record<TeamId, string>>;

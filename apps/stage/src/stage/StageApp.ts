@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { STAGE_HEIGHT, STAGE_WIDTH, TEAM_IDS } from '@bloxdance/shared';
 import type { FxEvent, GameState, TeamId } from '@bloxdance/shared';
 import { BeatClock } from '../animation/BeatClock';
+import { AudioEngine } from '../audio/AudioEngine';
 import { confettiRain, giftSparks, joinPuff } from '../fx/effects';
 import type { ScreenPoint } from '../overlay/NameTags';
 import { CameraRig } from './CameraRig';
@@ -21,9 +22,9 @@ export class StageApp {
   private readonly roster: RosterController;
   private readonly composer: EffectComposer;
   private state: GameState;
-  private trackKey = '';
+  private readonly audio: AudioEngine;
 
-  constructor(renderer: THREE.WebGLRenderer, initialState: GameState) {
+  constructor(renderer: THREE.WebGLRenderer, initialState: GameState, audioEnabled = true) {
     const camera = new THREE.PerspectiveCamera(40, STAGE_WIDTH / STAGE_HEIGHT, 0.1, 400);
     camera.setViewOffset(
       STAGE_WIDTH,
@@ -37,6 +38,7 @@ export class StageApp {
     this.rig = new CameraRig(camera);
     this.roster = new RosterController(this.world.scene, this.clock, camera);
     this.composer = createComposer(renderer, this.world.scene, camera);
+    this.audio = new AudioEngine(this.clock, audioEnabled);
     this.state = initialState;
     this.applyState(initialState);
   }
@@ -48,15 +50,7 @@ export class StageApp {
   applyState(state: GameState): void {
     const previous = this.state;
     this.state = state;
-    const key = `${state.track.id}|${state.track.bpm}|${state.track.startedAt}`;
-    if (key !== this.trackKey) {
-      this.trackKey = key;
-      this.clock.setTrack({
-        bpm: state.track.bpm,
-        offsetSeconds: 0,
-        startedAtSeconds: state.track.startedAt / 1000,
-      });
-    }
+    this.audio.applyState(state, Date.now());
     this.roster.applyState(state);
     if (state.phase !== previous.phase) this.updateCamera(state);
   }
@@ -95,6 +89,7 @@ export class StageApp {
   }
 
   handleFx(event: FxEvent): void {
+    this.audio.handleFx(event);
     const particles = this.world.particles;
     if (event.kind === 'gift') {
       giftSparks(particles, event.team, this.roster.positionOf(event.team), event.points);

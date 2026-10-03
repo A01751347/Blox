@@ -11,7 +11,9 @@
     "test": "pnpm -r test",
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint . && prettier --check .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "build": "pnpm --filter @bloxdance/stage build",
+    "start": "pnpm build && pnpm --filter @bloxdance/server start"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
