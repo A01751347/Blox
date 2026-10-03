@@ -1,0 +1,82 @@
+{
+  "id": "robot",
+  "name": "Robot",
+  "kind": "dance",
+  "level": 1,
+  "beats": 8,
+  "loop": true,
+  "keyframes": [
+    {
+      "beat": 0.0,
+      "joints": {
+        "shoulderL": [-90.0, 0.0, 0.0]
+      },
+      "ease": "step"
+    },
+    {
+      "beat": 1.0,
+      "joints": {
+        "shoulderL": [-90.0, 0.0, 0.0],
+        "shoulderR": [-90.0, 0.0, 0.0]
+      },
+      "ease": "step"
+    },
+    {
+      "beat": 2.0,
+      "joints": {
+        "neck": [0.0, 40.0, 0.0],
+        "shoulderL": [0.0, 0.0, -90.0],
+        "shoulderR": [0.0, 0.0, 90.0]
+      },
+      "ease": "step"
+    },
+    {
+      "beat": 3.0,
+      "joints": {
+        "neck": [0.0, 40.0, 0.0],
+        "shoulderL": [0.0, 0.0, -170.0],
+        "shoulderR": [0.0, 0.0, 170.0]
+      },
+      "ease": "step"
+    },
+    {
+      "beat": 4.0,
+      "joints": {
+        "torso": [0.0, 45.0, 0.0],
+        "neck": [0.0, -45.0, 0.0],
+        "shoulderL": [-90.0, 0.0, 0.0],
+        "shoulderR": [0.0, 0.0, 90.0]
+      },
+      "ease": "step"
+    },
+    {
+      "beat": 5.0,
+      "joints": {
+        "torso": [0.0, -45.0, 0.0],
+        "neck": [0.0, 45.0, 0.0],
+        "shoulderL": [0.0, 0.0, -90.0],
+        "shoulderR": [-90.0, 0.0, 0.0]
+      },
+      "ease": "step"
+    },
+    {
+      "beat": 6.0,
+      "joints": {
+        "shoulderL": [-45.0, 0.0, 0.0],
+        "shoulderR": [45.0, 0.0, 0.0],
+        "legL": [-35.0, 0.0, 0.0]
+      },
+      "ease": "step"
+    },
+    {
+      "beat": 7.0,
+      "joints": {
+        "neck": [20.0, 0.0, 0.0],
+        "shoulderL": [45.0, 0.0, 0.0],
+        "shoulderR": [-45.0, 0.0, 0.0],
+        "legR": [-35.0, 0.0, 0.0]
+      },
+      "ease": "step"
+    }
+  ]
+}

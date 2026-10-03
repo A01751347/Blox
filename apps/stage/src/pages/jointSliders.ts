@@ -12,7 +12,7 @@ export interface JointSliders {
 export function createJointSliders(
   parent: HTMLElement,
   character: () => Character,
-  onChange?: () => void,
+  onChange?: (name: JointName, rotation: Vec3) => void,
 ): JointSliders {
   const inputs = new Map<string, HTMLInputElement>();
   const readouts = new Map<string, HTMLElement>();
@@ -40,8 +40,9 @@ export function createJointSliders(
       readout.textContent = '0';
       slider.addEventListener('input', () => {
         readout.textContent = slider.value;
-        character().setJoint(name, readJoint(name));
-        onChange?.();
+        const rotation = readJoint(name);
+        character().setJoint(name, rotation);
+        onChange?.(name, rotation);
       });
       inputs.set(`${name}.${axis}`, slider);
       readouts.set(`${name}.${axis}`, readout);

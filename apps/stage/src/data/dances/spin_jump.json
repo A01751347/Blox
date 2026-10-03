@@ -1,0 +1,357 @@
+{
+  "id": "spin_jump",
+  "name": "Spin Jump",
+  "kind": "dance",
+  "level": 2,
+  "beats": 8,
+  "loop": true,
+  "keyframes": [
+    {
+      "beat": 0.0,
+      "joints": {
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "ease": "linear"
+    },
+    {
+      "beat": 0.25,
+      "joints": {
+        "root": [0.0, 15.469, 0.0],
+        "torso": [-2.296, 0.0, 0.0],
+        "shoulderL": [0.0, 0.0, -62.095],
+        "shoulderR": [0.0, 0.0, 62.095],
+        "legL": [-9.567, 0.0, -2.296],
+        "legR": [-9.567, 0.0, 2.296]
+      },
+      "rootOffset": [0.0, 0.459, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 0.5,
+      "joints": {
+        "root": [0.0, 56.25, 0.0],
+        "torso": [-4.243, 0.0, 0.0],
+        "shoulderL": [0.0, 0.0, -97.782],
+        "shoulderR": [0.0, 0.0, 97.782],
+        "legL": [-17.678, 0.0, -4.243],
+        "legR": [-17.678, 0.0, 4.243]
+      },
+      "rootOffset": [0.0, 0.849, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 0.75,
+      "joints": {
+        "root": [0.0, 113.906, 0.0],
+        "torso": [-5.543, 0.0, 0.0],
+        "shoulderL": [0.0, 0.0, -121.627],
+        "shoulderR": [0.0, 0.0, 121.627],
+        "legL": [-23.097, 0.0, -5.543],
+        "legR": [-23.097, 0.0, 5.543]
+      },
+      "rootOffset": [0.0, 1.109, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 1.0,
+      "joints": {
+        "root": [0.0, 180.0, 0.0],
+        "torso": [-6.0, 0.0, 0.0],
+        "shoulderL": [0.0, 0.0, -130.0],
+        "shoulderR": [0.0, 0.0, 130.0],
+        "legL": [-25.0, 0.0, -6.0],
+        "legR": [-25.0, 0.0, 6.0]
+      },
+      "rootOffset": [0.0, 1.2, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 1.25,
+      "joints": {
+        "root": [0.0, 246.094, 0.0],
+        "torso": [-5.543, 0.0, 0.0],
+        "shoulderL": [0.0, 0.0, -121.627],
+        "shoulderR": [0.0, 0.0, 121.627],
+        "legL": [-23.097, 0.0, -5.543],
+        "legR": [-23.097, 0.0, 5.543]
+      },
+      "rootOffset": [0.0, 1.109, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 1.5,
+      "joints": {
+        "root": [0.0, 303.75, 0.0],
+        "torso": [-4.243, 0.0, 0.0],
+        "shoulderL": [0.0, 0.0, -97.782],
+        "shoulderR": [0.0, 0.0, 97.782],
+        "legL": [-17.678, 0.0, -4.243],
+        "legR": [-17.678, 0.0, 4.243]
+      },
+      "rootOffset": [0.0, 0.849, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 1.75,
+      "joints": {
+        "root": [0.0, 344.531, 0.0],
+        "torso": [-2.296, 0.0, 0.0],
+        "shoulderL": [0.0, 0.0, -62.095],
+        "shoulderR": [0.0, 0.0, 62.095],
+        "legL": [-9.567, 0.0, -2.296],
+        "legR": [-9.567, 0.0, 2.296]
+      },
+      "rootOffset": [0.0, 0.459, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 2.0,
+      "joints": {
+        "root": [0.0, 360.0, 0.0],
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "ease": "linear"
+    },
+    {
+      "beat": 2.25,
+      "joints": {
+        "root": [0.0, 360.0, 0.0],
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "rootOffset": [0.0, 0.071, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 2.5,
+      "joints": {
+        "root": [0.0, 360.0, 0.0],
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "rootOffset": [0.0, 0.1, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 2.75,
+      "joints": {
+        "root": [0.0, 360.0, 0.0],
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "rootOffset": [0.0, 0.071, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 3.0,
+      "joints": {
+        "root": [0.0, 360.0, 0.0],
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "ease": "linear"
+    },
+    {
+      "beat": 3.25,
+      "joints": {
+        "root": [0.0, 360.0, 0.0],
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "rootOffset": [0.0, 0.071, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 3.5,
+      "joints": {
+        "root": [0.0, 360.0, 0.0],
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "rootOffset": [0.0, 0.1, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 3.75,
+      "joints": {
+        "root": [0.0, 360.0, 0.0],
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "rootOffset": [0.0, 0.071, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 4.0,
+      "joints": {
+        "root": [0.0, 360.0, 0.0],
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "ease": "linear"
+    },
+    {
+      "beat": 4.25,
+      "joints": {
+        "root": [0.0, 344.531, 0.0],
+        "torso": [-2.296, 0.0, 0.0],
+        "shoulderL": [0.0, 0.0, -62.095],
+        "shoulderR": [0.0, 0.0, 62.095],
+        "legL": [-9.567, 0.0, -2.296],
+        "legR": [-9.567, 0.0, 2.296]
+      },
+      "rootOffset": [0.0, 0.459, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 4.5,
+      "joints": {
+        "root": [0.0, 303.75, 0.0],
+        "torso": [-4.243, 0.0, 0.0],
+        "shoulderL": [0.0, 0.0, -97.782],
+        "shoulderR": [0.0, 0.0, 97.782],
+        "legL": [-17.678, 0.0, -4.243],
+        "legR": [-17.678, 0.0, 4.243]
+      },
+      "rootOffset": [0.0, 0.849, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 4.75,
+      "joints": {
+        "root": [0.0, 246.094, 0.0],
+        "torso": [-5.543, 0.0, 0.0],
+        "shoulderL": [0.0, 0.0, -121.627],
+        "shoulderR": [0.0, 0.0, 121.627],
+        "legL": [-23.097, 0.0, -5.543],
+        "legR": [-23.097, 0.0, 5.543]
+      },
+      "rootOffset": [0.0, 1.109, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 5.0,
+      "joints": {
+        "root": [0.0, 180.0, 0.0],
+        "torso": [-6.0, 0.0, 0.0],
+        "shoulderL": [0.0, 0.0, -130.0],
+        "shoulderR": [0.0, 0.0, 130.0],
+        "legL": [-25.0, 0.0, -6.0],
+        "legR": [-25.0, 0.0, 6.0]
+      },
+      "rootOffset": [0.0, 1.2, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 5.25,
+      "joints": {
+        "root": [0.0, 113.906, 0.0],
+        "torso": [-5.543, 0.0, 0.0],
+        "shoulderL": [0.0, 0.0, -121.627],
+        "shoulderR": [0.0, 0.0, 121.627],
+        "legL": [-23.097, 0.0, -5.543],
+        "legR": [-23.097, 0.0, 5.543]
+      },
+      "rootOffset": [0.0, 1.109, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 5.5,
+      "joints": {
+        "root": [0.0, 56.25, 0.0],
+        "torso": [-4.243, 0.0, 0.0],
+        "shoulderL": [0.0, 0.0, -97.782],
+        "shoulderR": [0.0, 0.0, 97.782],
+        "legL": [-17.678, 0.0, -4.243],
+        "legR": [-17.678, 0.0, 4.243]
+      },
+      "rootOffset": [0.0, 0.849, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 5.75,
+      "joints": {
+        "root": [0.0, 15.469, 0.0],
+        "torso": [-2.296, 0.0, 0.0],
+        "shoulderL": [0.0, 0.0, -62.095],
+        "shoulderR": [0.0, 0.0, 62.095],
+        "legL": [-9.567, 0.0, -2.296],
+        "legR": [-9.567, 0.0, 2.296]
+      },
+      "rootOffset": [0.0, 0.459, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 6.0,
+      "joints": {
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "ease": "linear"
+    },
+    {
+      "beat": 6.25,
+      "joints": {
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "rootOffset": [0.0, 0.071, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 6.5,
+      "joints": {
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "rootOffset": [0.0, 0.1, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 6.75,
+      "joints": {
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "rootOffset": [0.0, 0.071, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 7.0,
+      "joints": {
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "ease": "linear"
+    },
+    {
+      "beat": 7.25,
+      "joints": {
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "rootOffset": [0.0, 0.071, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 7.5,
+      "joints": {
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "rootOffset": [0.0, 0.1, 0.0],
+      "ease": "linear"
+    },
+    {
+      "beat": 7.75,
+      "joints": {
+        "shoulderL": [0.0, 0.0, -20.0],
+        "shoulderR": [0.0, 0.0, 20.0]
+      },
+      "rootOffset": [0.0, 0.071, 0.0],
+      "ease": "linear"
+    }
+  ]
+}

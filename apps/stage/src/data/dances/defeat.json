@@ -1,0 +1,105 @@
+{
+  "id": "defeat",
+  "name": "Defeat",
+  "kind": "defeat",
+  "level": 0,
+  "beats": 8,
+  "loop": true,
+  "keyframes": [
+    {
+      "beat": 0,
+      "joints": {},
+      "rootOffset": [0, 0, 0],
+      "ease": "easeInOut"
+    },
+    {
+      "beat": 1.5,
+      "joints": {
+        "torso": [12.0, 0.0, 0.0],
+        "neck": [40.0, 0.0, 0.0],
+        "shoulderL": [-30.0, 0.0, -6.0],
+        "shoulderR": [-30.0, 0.0, 6.0],
+        "legL": [-88.0, 0.0, 0.0],
+        "legR": [-88.0, 0.0, 0.0]
+      },
+      "rootOffset": [0.0, -1.85, 0.0],
+      "ease": "easeInOut"
+    },
+    {
+      "beat": 3,
+      "joints": {
+        "torso": [18.0, 0.0, 0.0],
+        "neck": [52.0, 0.0, 0.0],
+        "shoulderL": [-25.0, 0.0, -8.0],
+        "shoulderR": [-25.0, 0.0, 8.0],
+        "legL": [-88.0, 0.0, 0.0],
+        "legR": [-88.0, 0.0, 0.0]
+      },
+      "rootOffset": [0.0, -1.85, 0.0],
+      "ease": "easeInOut"
+    },
+    {
+      "beat": 4,
+      "joints": {
+        "torso": [12.0, 0.0, 0.0],
+        "neck": [40.0, 0.0, 0.0],
+        "shoulderL": [-30.0, 0.0, -6.0],
+        "shoulderR": [-30.0, 0.0, 6.0],
+        "legL": [-88.0, 0.0, 0.0],
+        "legR": [-88.0, 0.0, 0.0]
+      },
+      "rootOffset": [0.0, -1.85, 0.0],
+      "ease": "easeInOut"
+    },
+    {
+      "beat": 5.5,
+      "joints": {
+        "neck": [22.0, 0.0, 0.0],
+        "shoulderL": [-10.0, 0.0, -4.0],
+        "shoulderR": [-10.0, 0.0, 4.0]
+      },
+      "rootOffset": [0, 0, 0],
+      "ease": "easeInOut"
+    },
+    {
+      "beat": 6,
+      "joints": {
+        "neck": [5.0, 0.0, 0.0],
+        "shoulderL": [-85.0, 0.0, -26.0],
+        "shoulderR": [-85.0, 0.0, 26.0]
+      },
+      "rootOffset": [0, 0, 0],
+      "ease": "easeInOut"
+    },
+    {
+      "beat": 6.5,
+      "joints": {
+        "neck": [5.0, 0.0, 0.0],
+        "shoulderL": [-85.0, 0.0, 12.0],
+        "shoulderR": [-85.0, 0.0, -12.0]
+      },
+      "rootOffset": [0, 0, 0],
+      "ease": "easeInOut"
+    },
+    {
+      "beat": 7,
+      "joints": {
+        "neck": [5.0, 0.0, 0.0],
+        "shoulderL": [-85.0, 0.0, -26.0],
+        "shoulderR": [-85.0, 0.0, 26.0]
+      },
+      "rootOffset": [0, 0, 0],
+      "ease": "easeInOut"
+    },
+    {
+      "beat": 7.5,
+      "joints": {
+        "neck": [5.0, 0.0, 0.0],
+        "shoulderL": [-85.0, 0.0, 12.0],
+        "shoulderR": [-85.0, 0.0, -12.0]
+      },
+      "rootOffset": [0, 0, 0],
+      "ease": "easeInOut"
+    }
+  ]
+}

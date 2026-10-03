@@ -4,6 +4,7 @@ import { createCharacter } from '../character/characterFactory';
 import { EXPRESSION_NAMES } from '../character/face/faceTypes';
 import type { ExpressionName } from '../character/face/faceTypes';
 import { createDanceControls } from './danceControls';
+import { buildDanceStrip } from './danceStrip';
 import { createJointSliders } from './jointSliders';
 import { createLabScene } from './labScene';
 
@@ -101,7 +102,17 @@ const requestedExpression = query.get('expression');
 if (EXPRESSION_NAMES.some((name) => name === requestedExpression)) {
   expression = requestedExpression as ExpressionName;
 }
-if (query.has('all')) showGallery();
+const stripCount = Number(query.get('strip') ?? 0);
+if (stripCount > 0) {
+  clearCharacters();
+  characters = buildDanceStrip(
+    query.get('dance') ?? 'idle_bop',
+    stripCount,
+    query.get('id') ?? 'turbo',
+  );
+  characters.forEach((character) => lab.scene.add(character.root));
+  lab.camera.position.set(0, 4.5, 6 + stripCount * 3.6);
+} else if (query.has('all')) showGallery();
 else {
   const initialId = query.get('id') ?? ids[0] ?? 'chispa';
   characterSelect.value = initialId;
