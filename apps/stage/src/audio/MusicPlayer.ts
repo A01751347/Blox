@@ -1,7 +1,13 @@
 import { PLAYLIST } from '@bloxdance/shared';
 import type { TrackManifestEntry, TrackStyle } from '@bloxdance/shared';
 import type { BeatClock } from '../animation/BeatClock';
-import { chordTones, eventsForStep, STEPS_PER_BAR, STEPS_PER_BEAT } from './musicPattern';
+import {
+  chordTones,
+  eventsForStep,
+  sectionForStep,
+  STEPS_PER_BAR,
+  STEPS_PER_BEAT,
+} from './musicPattern';
 import { VoiceBank } from './voices';
 
 const SCHEDULER_INTERVAL_MS = 25;
@@ -142,13 +148,15 @@ export class MusicPlayer {
     const voices = this.voices;
     if (!voices) return;
     const events = eventsForStep(style, step);
+    const section = sectionForStep(step);
     const stepSeconds = secondsPerBeat / STEPS_PER_BEAT;
-    if (events.kick) voices.kick(time);
-    if (events.snare) voices.snare(time);
+    if (events.kick && section.kick) voices.kick(time);
+    if (events.snare && section.snare) voices.snare(time);
     if (events.hat && (this.intensity > 0.3 || step % 2 === 0)) voices.hat(time, step % 4 === 2);
     if (this.finalPush && step % 2 === 1) voices.hat(time, false);
-    if (events.bassNote !== null) voices.bass(time, events.bassNote, stepSeconds * 1.8);
-    if (events.leadNote !== null && this.intensity > 0.15) {
+    if (events.bassNote !== null && section.bass)
+      voices.bass(time, events.bassNote, stepSeconds * 1.8);
+    if (events.leadNote !== null && section.lead && this.intensity > 0.15) {
       voices.lead(time, events.leadNote, stepSeconds * 1.6, style.leadWave);
     }
     if (step % STEPS_PER_BAR === 0) {

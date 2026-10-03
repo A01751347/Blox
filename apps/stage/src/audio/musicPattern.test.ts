@@ -7,6 +7,7 @@ import {
   degreeToMidi,
   eventsForStep,
   midiToFrequency,
+  sectionForStep,
   stepDurationSeconds,
   STEPS_PER_BAR,
 } from './musicPattern';
@@ -67,5 +68,14 @@ describe('music patterns', () => {
         );
       }
     });
+  });
+
+  it('cycles build, drop, breakdown and drop every 4 bars', () => {
+    const barStep = (bar: number) => bar * STEPS_PER_BAR;
+    expect(sectionForStep(barStep(0)).lead).toBe(false);
+    expect(sectionForStep(barStep(4)).snare).toBe(true);
+    expect(sectionForStep(barStep(8)).kick).toBe(false);
+    expect(sectionForStep(barStep(12)).kick).toBe(true);
+    expect(sectionForStep(barStep(16)).lead).toBe(false);
   });
 });

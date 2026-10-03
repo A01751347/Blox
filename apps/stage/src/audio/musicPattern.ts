@@ -53,3 +53,26 @@ export function midiToFrequency(midi: number): number {
 export function stepDurationSeconds(bpm: number): number {
   return 60 / bpm / STEPS_PER_BEAT;
 }
+
+export interface SectionMask {
+  kick: boolean;
+  snare: boolean;
+  hat: boolean;
+  bass: boolean;
+  lead: boolean;
+}
+
+export const SECTION_BARS = 4;
+
+const SECTIONS: SectionMask[] = [
+  { kick: true, snare: false, hat: true, bass: true, lead: false },
+  { kick: true, snare: true, hat: true, bass: true, lead: true },
+  { kick: false, snare: false, hat: true, bass: false, lead: true },
+  { kick: true, snare: true, hat: true, bass: true, lead: true },
+];
+
+export function sectionForStep(step: number): SectionMask {
+  const bar = Math.floor(step / STEPS_PER_BAR);
+  const index = Math.floor(bar / SECTION_BARS) % SECTIONS.length;
+  return SECTIONS[index] as SectionMask;
+}

@@ -56,6 +56,7 @@ export class Overlay {
   update(state: GameState, heads: Record<TeamId, ScreenPoint>, nowMs: number): void {
     this.root.classList.toggle('panic', state.panic);
     this.root.classList.toggle('brb-on', state.brb);
+    this.root.classList.toggle('results-on', state.phase === 'RESULTS');
     if (state.phase !== this.lastPhase) this.triggerFlash(state.phase);
     this.lastPhase = state.phase;
     this.topBar.update(state, nowMs);

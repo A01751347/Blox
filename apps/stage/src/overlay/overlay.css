@@ -236,3 +236,8 @@
     opacity: 0;
   }
 }
+
+#overlay.results-on .name-tag,
+#overlay.results-on .instruction {
+  display: none;
+}
