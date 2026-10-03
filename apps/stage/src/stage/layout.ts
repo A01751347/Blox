@@ -30,6 +30,9 @@ export function podiumStandPosition(rank: number): THREE.Vector3 {
 }
 
 export const GENERAL_CAMERA = {
-  position: new THREE.Vector3(0, 13, 46),
+  position: new THREE.Vector3(0, 14.5, 52),
   target: new THREE.Vector3(0, 3, -4),
 };
+
+export const VIEW_SHIFT_X_PX = 80;
+export const VIEW_SHIFT_Y_PX = 185;

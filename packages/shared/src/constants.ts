@@ -18,6 +18,13 @@ export const TEAM_COLORS: Record<TeamId, string> = {
   yellow: '#ffbe0b',
 };
 
+export const TEAM_LABELS: Record<TeamId, string> = {
+  red: 'Rojo',
+  blue: 'Azul',
+  green: 'Verde',
+  yellow: 'Amarillo',
+};
+
 export const LEVEL_THRESHOLDS: readonly [number, number, number] = [100, 500, 2000];
 
 export function levelForEnergy(energy: number): EnergyLevel {

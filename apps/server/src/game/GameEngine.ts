@@ -1,6 +1,7 @@
 import {
   levelForEnergy,
   PHASE_SECONDS,
+  PLAYLIST,
   rosterForRound,
   TEAM_IDS,
   trackForRound,
@@ -61,6 +62,7 @@ export class GameEngine {
   private brb = false;
   private pausedAt: number | null = null;
   private rosterOverrides: Partial<Record<TeamId, string>> = {};
+  private trackOverride: string | null = null;
 
   constructor(private readonly options: EngineOptions) {
     this.recorder = options.recorder ?? new NullRecorder();
@@ -87,6 +89,14 @@ export class GameEngine {
   overrideRoster(team: TeamId, characterId: string | null): void {
     if (characterId) this.rosterOverrides[team] = characterId;
     else delete this.rosterOverrides[team];
+  }
+
+  overrideTrack(trackId: string | null): void {
+    this.trackOverride = trackId;
+  }
+
+  getRosterOverrides(): Partial<Record<TeamId, string>> {
+    return { ...this.rosterOverrides };
   }
 
   pause(): void {
@@ -218,7 +228,8 @@ export class GameEngine {
   private beginRound(startAt: number = this.options.now()): void {
     const now = startAt;
     this.roster = { ...rosterForRound(this.roundNumber), ...this.rosterOverrides };
-    this.track = trackForRound(this.roundNumber);
+    this.track =
+      PLAYLIST.find((entry) => entry.id === this.trackOverride) ?? trackForRound(this.roundNumber);
     this.trackStartedAt = now;
     this.board.reset();
     this.winners = [];

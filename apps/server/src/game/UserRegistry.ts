@@ -9,6 +9,7 @@ export interface UserRecord {
   team: TeamId | null;
   likeRemainder: number;
   activeThisRound: boolean;
+  lastSeen: number;
 }
 
 function emptyCounts(): Record<TeamId, number> {
@@ -17,12 +18,15 @@ function emptyCounts(): Record<TeamId, number> {
 
 export class UserRegistry {
   private readonly users = new Map<string, UserRecord>();
+  private clock = 0;
 
   touch(userId: string, nickname: string): UserRecord {
+    this.clock += 1;
     const existing = this.users.get(userId);
     if (existing) {
       existing.nickname = nickname;
       existing.activeThisRound = true;
+      existing.lastSeen = this.clock;
       return existing;
     }
     const created: UserRecord = {
@@ -31,9 +35,14 @@ export class UserRegistry {
       team: null,
       likeRemainder: 0,
       activeThisRound: true,
+      lastSeen: this.clock,
     };
     this.users.set(userId, created);
     return created;
+  }
+
+  recent(limit: number): UserRecord[] {
+    return [...this.users.values()].sort((a, b) => b.lastSeen - a.lastSeen).slice(0, limit);
   }
 
   members(): Record<TeamId, number> {
@@ -76,6 +85,7 @@ export class UserRegistry {
         team: entry.team,
         likeRemainder: entry.likeRemainder,
         activeThisRound: false,
+        lastSeen: 0,
       });
     });
   }

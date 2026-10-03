@@ -37,6 +37,10 @@ export class RosterController {
     private readonly camera: THREE.Camera,
   ) {}
 
+  characterRoots(): Array<[TeamId, THREE.Object3D]> {
+    return [...this.dancers.entries()].map(([team, dancer]) => [team, dancer.character.root]);
+  }
+
   positionOf(team: TeamId): THREE.Vector3 {
     return this.dancers.get(team)?.character.root.position.clone() ?? platformPosition(team);
   }

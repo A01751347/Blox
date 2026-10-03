@@ -2,3 +2,4 @@ node_modules
 dist
 pnpm-lock.yaml
 PLAN.md
+apps/server/src/admin/page.html

@@ -1,6 +1,7 @@
 import { STATE_BROADCAST_INTERVAL_MS } from '@bloxdance/shared';
 import { GameDatabase } from './db/Database.js';
 import { GameEngine } from './game/GameEngine.js';
+import { ModerationService } from './moderation/ModerationService.js';
 import { Hub } from './net/Hub.js';
 import { SimulatorSource } from './sources/SimulatorSource.js';
 import { TikTokSource } from './sources/tiktok.js';
@@ -14,6 +15,7 @@ export interface RuntimeOptions {
 export class GameRuntime {
   readonly now: () => number;
   readonly database: GameDatabase;
+  readonly moderation: ModerationService;
   readonly engine: GameEngine;
   readonly simulator: SimulatorSource;
   readonly tiktok = new TikTokSource();
@@ -23,7 +25,12 @@ export class GameRuntime {
   constructor(options: RuntimeOptions = {}) {
     this.now = options.now ?? Date.now;
     this.database = new GameDatabase(options.dbPath ?? ':memory:', this.now);
-    this.engine = new GameEngine({ now: this.now, recorder: this.database });
+    this.moderation = new ModerationService(this.database);
+    this.engine = new GameEngine({
+      now: this.now,
+      recorder: this.database,
+      toDisplayName: this.moderation.displayName,
+    });
     this.simulator = new SimulatorSource(options.random);
     this.simulator.start((event) => this.engine.handle(event));
     this.engine.onFx((event) => this.hub.broadcast({ type: 'fx', event }));

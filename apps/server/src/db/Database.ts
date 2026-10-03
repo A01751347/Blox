@@ -3,6 +3,7 @@ import type { TeamId } from '@bloxdance/shared';
 import type { InputEvent } from '../game/inputEvents.js';
 import type { TeamSnapshot } from '../game/UserRegistry.js';
 import type { AppliedEffect, GameRecorder } from './GameRecorder.js';
+import type { ModerationStore } from '../moderation/ModerationService.js';
 import { SCHEMA } from './schema.js';
 
 export interface StoredEvent {
@@ -21,7 +22,7 @@ export interface StoredRound {
   winners: TeamId[] | null;
 }
 
-export class GameDatabase implements GameRecorder {
+export class GameDatabase implements GameRecorder, ModerationStore {
   readonly raw: BetterSqlite3.Database;
   private readonly sessionId: number;
 
@@ -77,6 +78,23 @@ export class GameDatabase implements GameRecorder {
         )
         .run(input.userId, input.nickname, applied.team, at, applied.points);
     }
+  }
+
+  load(kind: 'blockedUser' | 'bannedWord'): string[] {
+    const rows = this.raw
+      .prepare('SELECT value FROM moderation_lists WHERE kind = ?')
+      .all(kind) as Array<{ value: string }>;
+    return rows.map((row) => row.value);
+  }
+
+  add(kind: 'blockedUser' | 'bannedWord', value: string): void {
+    this.raw
+      .prepare('INSERT OR IGNORE INTO moderation_lists (kind, value) VALUES (?, ?)')
+      .run(kind, value);
+  }
+
+  remove(kind: 'blockedUser' | 'bannedWord', value: string): void {
+    this.raw.prepare('DELETE FROM moderation_lists WHERE kind = ? AND value = ?').run(kind, value);
   }
 
   recordRaw(at: number, source: string, type: string, payload: unknown): void {

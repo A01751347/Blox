@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BloxDance Admin</title>
+    <link rel="icon" href="data:," />
+    <style>
+      :root { color-scheme: dark; }
+      body { margin: 0; font: 14px system-ui, sans-serif; background: #17191e; color: #e8eaed; }
+      header { display: flex; align-items: center; gap: 16px; padding: 12px 20px; background: #20232a; position: sticky; top: 0; }
+      header h1 { font-size: 18px; margin: 0; flex: 1; }
+      main { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 14px; padding: 16px; }
+      section { background: #20232a; border-radius: 10px; padding: 14px; }
+      h2 { margin: 0 0 10px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #9aa0a6; }
+      button, select, input { font: inherit; padding: 6px 10px; border-radius: 6px; border: 1px solid #4a4e57; background: #2f333b; color: inherit; }
+      button { cursor: pointer; }
+      button:hover { background: #3a3f49; }
+      button.danger { background: #8b1f27; border-color: #b3333d; }
+      button.on { background: #b3333d; }
+      .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 6px 0; }
+      .pill { padding: 2px 8px; border-radius: 99px; font-size: 12px; background: #34373f; }
+      .ok { background: #1f6b3a; }
+      .bad { background: #8b1f27; }
+      .team-red { color: #ff6b6b; } .team-blue { color: #6ea8ff; } .team-green { color: #5fd47e; } .team-yellow { color: #ffd23f; }
+      table { width: 100%; border-collapse: collapse; }
+      td { padding: 3px 4px; border-bottom: 1px solid #2c2f36; }
+      #timer { font-size: 22px; font-variant-numeric: tabular-nums; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>BloxDance · Admin</h1>
+      <span id="phase" class="pill"></span>
+      <span id="timer"></span>
+      <button id="panic" class="danger">⛔ Botón de pánico</button>
+      <button id="brb">☕ Volvemos enseguida</button>
+    </header>
+    <main>
+      <section>
+        <h2>Conexión</h2>
+        <div class="row">Fuente activa: <span id="source" class="pill"></span></div>
+        <div class="row">TikTok: <span id="tiktok" class="pill"></span></div>
+        <div class="row">Usuario del live: <span id="username"></span></div>
+        <div class="row">Simulador: <span id="simulator" class="pill"></span></div>
+      </section>
+      <section>
+        <h2>Ronda <span id="round"></span></h2>
+        <div class="row">
+          <button data-round="resume">▶ Iniciar</button>
+          <button data-round="pause">⏸ Pausar</button>
+          <button data-round="skip">⏭ Saltar fase</button>
+          <button data-round="resetPoints">↺ Reiniciar puntos</button>
+        </div>
+        <table id="energy"></table>
+      </section>
+      <section>
+        <h2>Simulador</h2>
+        <div class="row">
+          Equipo
+          <select id="simTeam">
+            <option value="red">1 Rojo</option>
+            <option value="blue">2 Azul</option>
+            <option value="green">3 Verde</option>
+            <option value="yellow">4 Amarillo</option>
+          </select>
+        </div>
+        <div class="row">
+          <button data-sim="join">Unirse</button>
+          <button data-sim="gift-1">Regalo pequeño</button>
+          <button data-sim="gift-30">Regalo medio</button>
+          <button data-sim="gift-1000">Regalo grande</button>
+          <button data-sim="like">Likes</button>
+          <button data-sim="follow">Follow</button>
+          <button data-sim="share">Share</button>
+        </div>
+        <div class="row">
+          Tormenta
+          <input id="stormMinutes" type="number" min="1" max="120" value="5" style="width: 70px" /> min
+          <button id="stormStart">Iniciar</button>
+          <button id="stormStop">Detener</button>
+        </div>
+      </section>
+      <section>
+        <h2>Roster y playlist</h2>
+        <div id="rosterSelects"></div>
+        <div class="row">Playlist <select id="track"></select></div>
+        <div class="row" style="color: #9aa0a6">Los cambios aplican en la siguiente ronda.</div>
+      </section>
+      <section>
+        <h2>Moderación</h2>
+        <div class="row">
+          <input id="word" placeholder="palabra prohibida" />
+          <button id="addWord">Agregar</button>
+        </div>
+        <div class="row" id="words"></div>
+        <h2 style="margin-top: 14px">Usuarios recientes</h2>
+        <table id="viewers"></table>
+        <h2 style="margin-top: 14px">Bloqueados</h2>
+        <div class="row" id="blocked"></div>
+      </section>
+    </main>
+    <script>
+      const TEAMS = { red: 'Rojo', blue: 'Azul', green: 'Verde', yellow: 'Amarillo' };
+      let status = null;
+      let rosterBuilt = false;
+
+      const post = (path, body) =>
+        fetch('/api/admin/' + path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+      const $ = (id) => document.getElementById(id);
+      const team = () => $('simTeam').value;
+
+      document.querySelectorAll('[data-round]').forEach((button) =>
+        button.addEventListener('click', () => post('round', { action: button.dataset.round })));
+      document.querySelectorAll('[data-sim]').forEach((button) =>
+        button.addEventListener('click', () => {
+          const [kind, diamonds] = button.dataset.sim.split('-');
+          const names = { 1: 'Rose', 30: 'Doughnut', 1000: 'Galaxy' };
+          if (kind === 'join') post('simulator', { action: 'chat', team: team() });
+          else if (kind === 'gift') post('simulator', { action: 'gift', team: team(), giftName: names[diamonds], repeat: diamonds === '1' ? 3 : 1 });
+          else if (kind === 'like') post('simulator', { action: 'like', team: team(), count: 25 });
+          else post('simulator', { action: kind });
+        }));
+      $('stormStart').addEventListener('click', () => post('simulator', { action: 'storm', minutes: Number($('stormMinutes').value) }));
+      $('stormStop').addEventListener('click', () => post('simulator', { action: 'stopStorm' }));
+      $('panic').addEventListener('click', () => post('panic', { enabled: !status.state.panic }));
+      $('brb').addEventListener('click', () => post('brb', { enabled: !status.state.brb }));
+      $('track').addEventListener('change', (event) => post('track', { trackId: event.target.value || null }));
+      $('addWord').addEventListener('click', () => {
+        const value = $('word').value.trim();
+        if (value) post('moderation', { action: 'addWord', value });
+        $('word').value = '';
+      });
+
+      function buildRosterSelects(data) {
+        const holder = $('rosterSelects');
+        holder.innerHTML = '';
+        Object.keys(TEAMS).forEach((key) => {
+          const row = document.createElement('div');
+          row.className = 'row';
+          const select = document.createElement('select');
+          select.add(new Option('automático', ''));
+          data.characters.forEach((id) => select.add(new Option(id, id)));
+          select.value = data.rosterOverrides[key] || '';
+          select.addEventListener('change', () => post('roster', { team: key, characterId: select.value || null }));
+          row.append(TEAMS[key] + ' ', select);
+          holder.appendChild(row);
+        });
+        const track = $('track');
+        track.innerHTML = '';
+        track.add(new Option('automática', ''));
+        data.playlist.forEach((item) => track.add(new Option(item.title + ' · ' + item.bpm + ' BPM', item.id)));
+      }
+
+      function formatClock(ms) {
+        const seconds = Math.max(0, Math.ceil(ms / 1000));
+        return Math.floor(seconds / 60) + ':' + String(seconds % 60).padStart(2, '0');
+      }
+
+      function render() {
+        if (!status) return;
+        const { state } = status;
+        if (!rosterBuilt) { buildRosterSelects(status); rosterBuilt = true; }
+        $('phase').textContent = state.phase + (state.paused ? ' · en pausa' : '');
+        $('timer').textContent = formatClock(state.phaseEndsAt - Date.now());
+        $('round').textContent = '#' + state.roundNumber;
+        $('source').textContent = state.source;
+        $('tiktok').textContent = status.tiktok.connected ? 'conectado' : status.tiktok.detail;
+        $('tiktok').className = 'pill ' + (status.tiktok.connected ? 'ok' : 'bad');
+        $('username').textContent = status.tiktok.username || '—';
+        $('simulator').textContent = status.simulator.storming ? 'tormenta' : status.simulator.detail;
+        $('panic').classList.toggle('on', state.panic);
+        $('brb').classList.toggle('on', state.brb);
+        $('energy').innerHTML = Object.keys(TEAMS).map((key) =>
+          '<tr><td class="team-' + key + '">' + TEAMS[key] + ' · ' + state.roster[key] + '</td><td>' + Math.round(state.energy[key]) +
+          ' pts</td><td>nv ' + state.level[key] + '</td><td>' + state.members[key] + ' 👤</td></tr>').join('');
+        $('words').innerHTML = '';
+        status.moderation.customWords.forEach((word) => {
+          const button = document.createElement('button');
+          button.textContent = word + ' ✕';
+          button.addEventListener('click', () => post('moderation', { action: 'removeWord', value: word }));
+          $('words').appendChild(button);
+        });
+        $('viewers').innerHTML = '';
+        status.viewers.forEach((viewer) => {
+          const row = document.createElement('tr');
+          row.innerHTML = '<td>' + viewer.nickname.replace(/</g, '&lt;') + '</td><td class="team-' + viewer.team + '">' + (viewer.team || '—') + '</td>';
+          const cell = document.createElement('td');
+          const button = document.createElement('button');
+          button.textContent = viewer.blocked ? 'Desbloquear' : 'Bloquear';
+          button.addEventListener('click', () => post('moderation', { action: viewer.blocked ? 'unblockUser' : 'blockUser', value: viewer.userId }));
+          cell.appendChild(button);
+          row.appendChild(cell);
+          $('viewers').appendChild(row);
+        });
+        $('blocked').textContent = status.moderation.blockedUsers.join(', ') || 'ninguno';
+      }
+
+      async function poll() {
+        try {
+          status = await (await fetch('/api/admin/status')).json();
+          render();
+        } catch (error) {
+          $('phase').textContent = 'sin conexión';
+        }
+      }
+      poll();
+      setInterval(poll, 1000);
+    </script>
+  </body>
+</html>

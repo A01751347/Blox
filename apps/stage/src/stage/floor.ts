@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { createStudTexture } from './studTexture';
 
-const FLOOR_SIZE = 80;
+const FLOOR_SIZE = 130;
 const FLOOR_DEPTH = 2;
 
 export function createFloor(): THREE.Group {

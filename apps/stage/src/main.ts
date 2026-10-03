@@ -5,6 +5,8 @@ import { FpsCounter } from './dev/fpsCounter';
 import { createDemoState } from './dev/demoState';
 import { keepParticleStorm } from './dev/particleStorm';
 import { connectToServer } from './net/client';
+import { Overlay } from './overlay/Overlay';
+import './overlay/overlay.css';
 
 const frame = document.getElementById('frame') as HTMLElement;
 const canvas = document.getElementById('stage-canvas') as HTMLCanvasElement;
@@ -16,19 +18,17 @@ const renderer = createRenderer(canvas);
 const app = new StageApp(renderer, createDemoState(params));
 const useDemo = params.has('demo') || params.has('bench');
 
-const phaseLabel = document.createElement('div');
-phaseLabel.style.cssText =
-  'position:absolute;left:0;right:0;top:300px;text-align:center;color:#fff;' +
-  'font-size:96px;font-weight:700;text-shadow:0 6px 0 #0006';
-overlay.appendChild(phaseLabel);
+const overlayView = new Overlay(overlay);
 
 if (!useDemo) {
   connectToServer({
     onState: (state) => {
       app.applyState(state);
-      phaseLabel.textContent = state.phase;
     },
-    onFx: (event) => app.handleFx(event),
+    onFx: (event) => {
+      app.handleFx(event);
+      overlayView.pushFx(event);
+    },
   });
 }
 
@@ -41,5 +41,12 @@ renderer.setAnimationLoop((now) => {
   previous = now;
   if (params.has('bench')) keepParticleStorm(app.world.particles);
   app.frame(delta, (now - start) / 1000);
+  overlayView.update(app.currentState, app.headScreenPositions(), Date.now());
   fps?.tick();
 });
+
+if (import.meta.env.DEV) {
+  (window as unknown as { __stage: unknown }).__stage = {
+    rects: () => app.characterScreenRects(),
+  };
+}
