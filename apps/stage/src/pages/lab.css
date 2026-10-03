@@ -1,0 +1,71 @@
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: #1b1d22;
+  font-family: system-ui, sans-serif;
+  color: #e8eaed;
+  overflow: hidden;
+}
+
+#lab-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(100% - 340px);
+  height: 100%;
+  display: block;
+}
+
+#lab-panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 340px;
+  box-sizing: border-box;
+  padding: 12px;
+  overflow-y: auto;
+  background: #24272e;
+  font-size: 13px;
+}
+
+#lab-panel h3 {
+  margin: 14px 0 6px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #9aa0a6;
+}
+
+.slider-row {
+  display: grid;
+  grid-template-columns: 14px 1fr 44px;
+  gap: 6px;
+  align-items: center;
+}
+
+.slider-row input[type='range'] {
+  width: 100%;
+}
+
+.panel-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin: 6px 0;
+}
+
+.panel-row select,
+.panel-row button {
+  flex: 1;
+  padding: 6px;
+  background: #34373f;
+  color: inherit;
+  border: 1px solid #4a4e57;
+  border-radius: 4px;
+}
+
+.panel-row button {
+  cursor: pointer;
+}

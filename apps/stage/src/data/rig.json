@@ -1,0 +1,8 @@
+{
+  "head": { "size": [1.3, 1.3, 1.3], "bevel": 0.18 },
+  "torso": { "size": [2, 2, 1], "bevel": 0.08 },
+  "arm": { "size": [1, 2, 1], "bevel": 0.08, "shoulderDrop": 0.25 },
+  "leg": { "size": [1, 2, 1], "bevel": 0.08 },
+  "bevelSegments": 4,
+  "material": { "roughness": 0.45, "metalness": 0 }
+}
