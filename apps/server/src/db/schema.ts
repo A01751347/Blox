@@ -1,0 +1,44 @@
+export const SCHEMA = `
+CREATE TABLE IF NOT EXISTS sessions (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  started_at INTEGER NOT NULL,
+  ended_at INTEGER
+);
+CREATE TABLE IF NOT EXISTS rounds (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  session_id INTEGER NOT NULL REFERENCES sessions(id),
+  number INTEGER NOT NULL,
+  roster TEXT NOT NULL,
+  teams_snapshot TEXT NOT NULL,
+  started_at INTEGER NOT NULL,
+  ended_at INTEGER,
+  energy TEXT,
+  winners TEXT
+);
+CREATE TABLE IF NOT EXISTS events (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  round_id INTEGER NOT NULL REFERENCES rounds(id),
+  at INTEGER NOT NULL,
+  kind TEXT NOT NULL,
+  user_id TEXT NOT NULL,
+  payload TEXT NOT NULL,
+  team TEXT,
+  points INTEGER NOT NULL DEFAULT 0,
+  scored INTEGER NOT NULL DEFAULT 0
+);
+CREATE INDEX IF NOT EXISTS events_round ON events(round_id);
+CREATE TABLE IF NOT EXISTS users (
+  user_id TEXT PRIMARY KEY,
+  nickname TEXT NOT NULL,
+  team TEXT,
+  first_seen INTEGER NOT NULL,
+  total_points INTEGER NOT NULL DEFAULT 0
+);
+CREATE TABLE IF NOT EXISTS raw_events (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  at INTEGER NOT NULL,
+  source TEXT NOT NULL,
+  type TEXT NOT NULL,
+  payload TEXT NOT NULL
+);
+`;

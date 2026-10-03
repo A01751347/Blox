@@ -32,6 +32,7 @@ export interface GameState {
   winners: TeamId[];
   panic: boolean;
   brb: boolean;
+  paused: boolean;
 }
 
 export type FxEvent =
@@ -44,6 +45,7 @@ export type FxEvent =
       big: boolean;
     }
   | { kind: 'join'; team: TeamId; user: string }
+  | { kind: 'hint'; user: string }
   | { kind: 'follow'; user: string }
   | { kind: 'share'; user: string };
 

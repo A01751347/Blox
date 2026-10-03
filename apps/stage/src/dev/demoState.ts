@@ -25,5 +25,6 @@ export function createDemoState(params: URLSearchParams): GameState {
     winners: phase === 'RESULTS' ? ['yellow'] : [],
     panic: false,
     brb: false,
+    paused: false,
   };
 }

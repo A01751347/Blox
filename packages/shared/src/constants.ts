@@ -29,7 +29,7 @@ export function levelForEnergy(energy: number): EnergyLevel {
 
 export const PHASE_SECONDS = {
   LOBBY: 15,
-  ROUND: 180,
+  ROUND: 150,
   FINAL_30: 30,
   RESULTS: 15,
   COOLDOWN: 10,

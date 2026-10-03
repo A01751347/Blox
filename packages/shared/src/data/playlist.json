@@ -1,0 +1,36 @@
+{
+  "tracks": [
+    {
+      "id": "pulse_110",
+      "title": "Pulse",
+      "file": null,
+      "bpm": 110,
+      "offsetSeconds": 0,
+      "license": "original-procedural"
+    },
+    {
+      "id": "groove_120",
+      "title": "Groove",
+      "file": null,
+      "bpm": 120,
+      "offsetSeconds": 0,
+      "license": "original-procedural"
+    },
+    {
+      "id": "bounce_126",
+      "title": "Bounce",
+      "file": null,
+      "bpm": 126,
+      "offsetSeconds": 0,
+      "license": "original-procedural"
+    },
+    {
+      "id": "rush_132",
+      "title": "Rush",
+      "file": null,
+      "bpm": 132,
+      "offsetSeconds": 0,
+      "license": "original-procedural"
+    }
+  ]
+}
