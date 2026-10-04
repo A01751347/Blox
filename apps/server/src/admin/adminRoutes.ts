@@ -3,16 +3,12 @@ import type { FastifyInstance, FastifyRequest } from 'fastify';
 import { PLAYLIST, ROSTER_ROTATION, TEAM_IDS } from '@bloxdance/shared';
 import type { TeamId } from '@bloxdance/shared';
 import type { GameRuntime } from '../runtime.js';
+import { decideAdminAccess } from './adminAuth.js';
 import { runSimulatorAction } from './simulatorActions.js';
 import type { SimulatorAction } from './simulatorActions.js';
 
-const LOOPBACK = new Set(['127.0.0.1', '::1', '::ffff:127.0.0.1']);
 const RECENT_VIEWERS = 30;
 const pageHtml = readFileSync(new URL('./page.html', import.meta.url), 'utf8');
-
-export function isLoopback(address: string): boolean {
-  return LOOPBACK.has(address);
-}
 
 type RoundAction = 'pause' | 'resume' | 'skip' | 'resetPoints';
 type ModerationAction = 'blockUser' | 'unblockUser' | 'addWord' | 'removeWord';
@@ -36,10 +32,22 @@ export function buildStatus(runtime: GameRuntime) {
   };
 }
 
-export function registerAdminRoutes(app: FastifyInstance, runtime: GameRuntime): void {
+export function registerAdminRoutes(
+  app: FastifyInstance,
+  runtime: GameRuntime,
+  adminToken?: string,
+): void {
   app.addHook('onRequest', async (request: FastifyRequest, reply) => {
     const isAdmin = request.url.startsWith('/admin') || request.url.startsWith('/api/admin');
-    if (isAdmin && !isLoopback(request.ip)) await reply.code(403).send({ error: 'localhost only' });
+    if (!isAdmin) return;
+    const decision = decideAdminAccess(request.ip, request.headers.authorization, adminToken);
+    if (decision === 'forbidden') await reply.code(403).send({ error: 'localhost only' });
+    if (decision === 'challenge') {
+      await reply
+        .code(401)
+        .header('www-authenticate', 'Basic realm="BloxDance admin"')
+        .send({ error: 'authentication required' });
+    }
   });
 
   app.get('/admin', async (_request, reply) => reply.type('text/html').send(pageHtml));

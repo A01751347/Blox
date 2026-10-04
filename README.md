@@ -5,6 +5,7 @@ Live vertical de TikTok donde 4 personajes de bloques bailan y la audiencia deci
 - `PLAN.md`: plan completo de construcción.
 - `CLAUDE.md`: reglas de código y de producto.
 - `docs/obs.md`: cómo capturar el stage en OBS y transmitir.
+- `docs/deploy-homelab.md`: despliegue 24/7 con Docker Compose, streamer automático, monitoreo y respaldos.
 
 ## Arranque rápido
 

@@ -1,20 +1,31 @@
 import { mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { buildApp } from './app.js';
+import { parseConfig } from './config.js';
 import { GameRuntime } from './runtime.js';
 import { createLiveConnection } from './sources/tiktokConnection.js';
 
-const port = Number(process.env.PORT ?? 3000);
-const dbPath = process.env.DB_PATH ?? 'data/bloxdance.sqlite';
-mkdirSync(dirname(dbPath), { recursive: true });
+const config = parseConfig(process.env);
+mkdirSync(dirname(config.dbPath), { recursive: true });
 
 const { app, runtime } = await buildApp(
-  new GameRuntime({ dbPath, createConnection: createLiveConnection }),
+  new GameRuntime({
+    dbPath: config.dbPath,
+    createConnection: createLiveConnection,
+    maintenance: {
+      backupDir: config.backupDir,
+      backupsToKeep: config.backupsToKeep,
+      rawRetentionDays: config.rawRetentionDays,
+    },
+  }),
+  { adminToken: config.adminToken, logLevel: config.logLevel, trustProxy: config.trustProxy },
 );
 runtime.start();
-await app.listen({ port, host: '0.0.0.0' });
+await app.listen({ port: config.port, host: '0.0.0.0' });
 
-if (process.env.TIKTOK_USERNAME) runtime.connectTikTok(process.env.TIKTOK_USERNAME);
+if (config.tiktokUsername) runtime.connectTikTok(config.tiktokUsername);
+if (!config.adminToken)
+  app.log.warn('ADMIN_TOKEN not set: /admin is only reachable from localhost');
 
 process.on('unhandledRejection', (reason) => app.log.error({ reason }, 'unhandled rejection'));
 process.on('uncaughtException', (error) => app.log.error({ error }, 'uncaught exception'));

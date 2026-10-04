@@ -1,0 +1,20 @@
+[Unit]
+Description=BloxDance Live (server + stage)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=bloxdance
+WorkingDirectory=/opt/bloxdance/apps/server
+EnvironmentFile=/etc/bloxdance.env
+ExecStart=/opt/bloxdance/apps/server/node_modules/.bin/tsx src/index.ts
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/bloxdance
+StateDirectory=bloxdance
+
+[Install]
+WantedBy=multi-user.target
